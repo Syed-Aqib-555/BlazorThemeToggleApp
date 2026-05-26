@@ -2,6 +2,47 @@
 
 <PageTitle>Home</PageTitle>
 
-<h1>Hello, world!</h1>
+<div class="home-shell">
+    <section class="hero-section">
+        <div class="hero-section__copy">
+            <p class="eyebrow">Application 07</p>
+            <h1>Light and dark mode with a remembered preference.</h1>
+            <p class="hero-lead">
+                A polished Blazor Server experience that applies the selected theme across the page and keeps it after refresh.
+            </p>
+        </div>
 
-Welcome to your new app.
+        <div class="theme-preview" aria-hidden="true">
+            <div class="theme-preview__header">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="theme-preview__body">
+                <div class="theme-preview__panel wide"></div>
+                <div class="theme-preview__panel"></div>
+                <div class="theme-preview__panel accent"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="insight-grid" aria-label="Theme implementation details">
+        <article class="insight-card">
+            <span class="insight-card__kicker">Button</span>
+            <strong>Layout control</strong>
+            <p>The toggle is available from the shared layout, so every page can use it.</p>
+        </article>
+
+        <article class="insight-card">
+            <span class="insight-card__kicker">Storage</span>
+            <strong>localStorage</strong>
+            <p>The browser stores the selected light or dark value under the theme key.</p>
+        </article>
+
+        <article class="insight-card">
+            <span class="insight-card__kicker">Scope</span>
+            <strong>Whole page</strong>
+            <p>The body receives a theme class and the interface updates through CSS variables.</p>
+        </article>
+    </section>
+</div>

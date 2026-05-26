@@ -1,0 +1,41 @@
+@using Microsoft.JSInterop
+@inject IJSRuntime JS
+
+<button type="button"
+        class="@ToggleClass"
+        @onclick="ToggleThemeAsync"
+        aria-pressed="@IsDarkMode"
+        title="@ToggleLabel">
+    <span class="theme-toggle__track" aria-hidden="true">
+        <span class="theme-toggle__thumb"></span>
+    </span>
+    <span class="theme-toggle__label">@ToggleLabel</span>
+</button>
+
+@code {
+    private string currentTheme = "light";
+
+    private bool IsDarkMode => currentTheme == "dark";
+
+    private string ToggleLabel => IsDarkMode ? "Switch to Light Mode" : "Switch to Dark Mode";
+
+    private string ToggleClass => $"theme-toggle {(IsDarkMode ? "is-dark" : "is-light")}";
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (!firstRender)
+        {
+            return;
+        }
+
+        currentTheme = await JS.InvokeAsync<string>("blazorTheme.get");
+        await JS.InvokeVoidAsync("blazorTheme.apply", currentTheme);
+        StateHasChanged();
+    }
+
+    private async Task ToggleThemeAsync()
+    {
+        currentTheme = IsDarkMode ? "light" : "dark";
+        await JS.InvokeVoidAsync("blazorTheme.set", currentTheme);
+    }
+}
